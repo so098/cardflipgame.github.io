@@ -18,6 +18,15 @@ let restTime;
 const ROW = 4;
 const COL = 4;
 let isStarted = false;
+
+const cardContainer = document.createElement('div');
+cardContainer.classList.add('card-container');
+cardContainer.addEventListener('click',(e)=>{
+ // console.log(e.target+'front back',e.target.parentNode+'card');
+  e.target.parentNode.style.background = '#fce700';
+  handleCard(e);
+});
+
 function randomPlayer() {
   while(frontImagesCopy.length > 0){
     const colors = Math.floor(Math.random()*frontImagesCopy.length);
@@ -91,13 +100,7 @@ function handleStartGame() {
 }
 
 function cardControl() {
-  const cardContainer = document.createElement('div');
-  cardContainer.classList.add('card-container');
-  cardContainer.addEventListener('click',(e)=>{
-    console.log(e.target+'front back',e.target.parentNode+'card');
-   // e.currentTarget.style.background = '#fce700';
-    handleCard(e);
-  });
+
   for (let i = 0; i < ROW*COL; i++) {
     const card = createCardElement();
     cardContainer.append(card);
