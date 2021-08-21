@@ -107,7 +107,7 @@ function cardControl() {
   for (let i = 0; i < ROW*COL; i++) {
     const card = createCardElement();
     card.addEventListener(clickEvent,handleCard);
-    card.addEventListener('touchend',handleCard);
+    card.addEventListener('touchstart',handleCard);
     cardContainer.append(card);
     setTimeout(() => {
       card.classList.add('hidden');
