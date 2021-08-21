@@ -83,8 +83,8 @@ function handleStartGame() {
   id = 0;
   countSuccess = 0;
   countRemain = frontImages.length;
-  $successCount.textContent = `찾은 가족 : ${countSuccess}개`;
-  $remainCount.textContent = `남은 가족 : ${countRemain}개`;
+  $successCount.textContent = `찾은 가족 : ${countSuccess}명`;
+  $remainCount.textContent = `남은 가족 : ${countRemain}명`;
   randomPlayer();
   cardControl();
 
@@ -93,19 +93,21 @@ function handleStartGame() {
 function cardControl() {
   const cardContainer = document.createElement('div');
   cardContainer.classList.add('card-container');
+  cardContainer.addEventListener('click',(e)=>{
+    console.log(e.target+'front back',e.target.parentNode+'card');
+   // e.currentTarget.style.background = '#fce700';
+    handleCard(e);
+  });
   for (let i = 0; i < ROW*COL; i++) {
     const card = createCardElement();
     cardContainer.append(card);
-    card.addEventListener('click',(e)=>{
-      e.currentTarget.style.background = '#fce700';
-      handleCard(e);
-    });
+    
     setTimeout(() => {
-      card.classList.add('hidden');
+      card.classList.add('selected');
       isStarted = false;
     },100+100*i);
     setTimeout(() => {
-      card.classList.remove('hidden');
+      card.classList.remove('selected');
       isStarted = true;
     },3000);
   }
@@ -121,15 +123,15 @@ const twoTarget = [];
 const whileTwo = [];
 const doubleClick = [];
 function handleCard(e) {
-  if (!isStarted || doubleClick.includes(e.currentTarget.dataset.id) || !e.target.dataset.background) {
+  if (!isStarted || doubleClick.includes(e.target.parentNode.dataset.id) || !e.target.dataset.background) {
     return;
   }
 
   twoTarget.push(e.target.dataset.background);
-  whileTwo.push(e.currentTarget);
-  doubleClick.push(e.currentTarget.dataset.id)
+  whileTwo.push(e.target.parentNode);
+  doubleClick.push(e.target.parentNode.dataset.id)
 
-  e.currentTarget.classList.add('hidden');
+  e.target.parentNode.classList.add('selected');
 
   if(twoTarget.length>=2){
     if (twoTarget[0] === twoTarget[1]) {
@@ -137,14 +139,14 @@ function handleCard(e) {
       console.log('맞춤');
 
       setTimeout(()=>{
-        whileTwo[0].classList.add('hidden');
-          whileTwo[1].classList.add('hidden');
+        whileTwo[0].classList.add('selected');
+          whileTwo[1].classList.add('selected');
       })
       
     } else if (twoTarget[0] !== twoTarget[1]){
       setTimeout(() => {
-        whileTwo[0].classList.remove('hidden');
-        whileTwo[1].classList.remove('hidden');
+        whileTwo[0].classList.remove('selected');
+        whileTwo[1].classList.remove('selected');
         console.log('못맞충',whileTwo);
         
       },300)
@@ -159,8 +161,8 @@ function handleCard(e) {
 
   }
   countRemain = frontImages.length - countSuccess;
-  $successCount.textContent = `찾은 가족 : ${countSuccess}개`;
-  $remainCount.textContent = `남은 가족 : ${countRemain}개`;
+  $successCount.textContent = `찾은 가족 : ${countSuccess}명`;
+  $remainCount.textContent = `남은 가족 : ${countRemain}명`;
   showPopupResult(countRemain);
 }
 function showPopupResult(countRemain){

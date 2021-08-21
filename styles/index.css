@@ -127,7 +127,7 @@ button:hover {
   transition: all 0.5s;
 }
 
-.card.hidden .item.front{
+.card.selected .item.front{
   transition: transform 0.2s;
   transform: rotateY(180deg);
 }
@@ -145,7 +145,7 @@ button:hover {
   background-size: cover;
 }
 
-.card.hidden .item.back{
+.card.selected .item.back{
   transform: rotateY(0deg);
 }
 
