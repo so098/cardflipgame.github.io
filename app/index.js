@@ -139,7 +139,7 @@ function handleCard(e) {
   doubleClick.push(e.currentTarget.dataset.id)
 
   e.currentTarget.classList.add('hidden');
-
+  e.currentTarget.style.background = '#72be5c';
   if(twoTarget.length>=2){
     if (twoTarget[0] === twoTarget[1]) {
       countSuccess++;
