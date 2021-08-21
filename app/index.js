@@ -101,8 +101,9 @@ function cardControl() {
     card.addEventListener('click',(e)=>{
       console.log(e.target.nextSibling,e.target.parentNode);
      // console.log(e.target+'front back',e.target.parentNode+'card');
-      e.target.style.background = '#fce700';
-      handleCard(e);
+     // e.target.nextSibling.style.background = '#fce700';
+      e.target.nextSibling.parentNode.classList.add('selected');
+     // handleCard(e);
     });
     setTimeout(() => {
       card.classList.add('selected');
