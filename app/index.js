@@ -78,7 +78,7 @@ function handleStartGame() {
   $startButton.classList.remove('transition');
   $cardGameArea.classList.remove('popup-hidden');
   isStarted = true;
-  cardContainer.textContent = '';
+  $cardGameArea.textContent = '';
   frontImagesCopy = frontImages.concat(frontImages);
   shuffled = [];
   id = 0;
@@ -90,33 +90,33 @@ function handleStartGame() {
   cardControl();
 
 }
-const cardContainer = document.createElement('div');
-cardContainer.classList.add('card-container');
-cardContainer.addEventListener('click',(e)=>{
-  console.log(e.target,e.target.parentNode);
- // console.log(e.target+'front back',e.target.parentNode+'card');
-  e.target.style.background = '#fce700';
-  //handleCard(e);
-});
-function cardControl() {
 
+function cardControl() {
+  const cardContainer = document.createElement('div');
+  cardContainer.classList.add('card-container');
+ 
   for (let i = 0; i < ROW*COL; i++) {
     const card = createCardElement();
     cardContainer.append(card);
-    
-   // setTimeout(() => {
+    card.addEventListener('click',(e)=>{
+      console.log(e.target.nextSibling,e.target.parentNode);
+     // console.log(e.target+'front back',e.target.parentNode+'card');
+      e.target.style.background = '#fce700';
+      handleCard(e);
+    });
+    setTimeout(() => {
       card.classList.add('selected');
       isStarted = false;
-   // },100+100*i);
-   // setTimeout(() => {
-   //   card.classList.remove('selected');
-   //   isStarted = true;
-   // },3000);
+    },100+100*i);
+    setTimeout(() => {
+      card.classList.remove('selected');
+      isStarted = true;
+    },3000);
   }
 
-  setTimeout(() => {
-    startGameTimer();
-  },4000);
+ // setTimeout(() => {
+ //   startGameTimer();
+ // },4000);
   
   $cardGameArea.append(cardContainer);
 }
@@ -131,9 +131,9 @@ function handleCard(e) {
 
   twoTarget.push(e.target.dataset.background);
   whileTwo.push(e.target.parentNode);
-  doubleClick.push(e.target.parentNode.dataset.id)
+  doubleClick.push(e.target.parentNode.dataset.id);
 
-  e.target.parentNode.classList.add('selected');
+  e.target.nextSibling.parentNode.classList.add('selected');
 
   if(twoTarget.length>=2){
     if (twoTarget[0] === twoTarget[1]) {
@@ -171,7 +171,7 @@ function showPopupResult(countRemain){
   if(countRemain === 0) {
     stopGameTimer();
     setTimeout(()=>{
-      showPopupText('그걸 다 찾다니 굉장해 엄청나~!')
+      showPopupText('그걸 다 찾다니 굉장해 엄청나~!');
     },500);
     
   }

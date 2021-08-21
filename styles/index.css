@@ -135,11 +135,14 @@ button:hover {
 
 .front {
   position: absolute;
+  z-index: 1;
   transform: rotateY(0deg);
   background-color: #fdd154;
 }
 
 .back {
+  position: absolute;
+  z-index: 2;
   transform: rotateY(-180deg);
   background-position: center;
   background-repeat: no-repeat;
