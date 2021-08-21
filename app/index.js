@@ -104,14 +104,14 @@ function cardControl() {
     const card = createCardElement();
     cardContainer.append(card);
     
-    setTimeout(() => {
+   // setTimeout(() => {
       card.classList.add('selected');
       isStarted = false;
-    },100+100*i);
-    setTimeout(() => {
-      card.classList.remove('selected');
-      isStarted = true;
-    },3000);
+   // },100+100*i);
+   // setTimeout(() => {
+   //   card.classList.remove('selected');
+   //   isStarted = true;
+   // },3000);
   }
 
   setTimeout(() => {
