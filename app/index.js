@@ -25,15 +25,6 @@ function randomPlayer() {
   }
 }
 
-let clickEvent = (function() {
-  if ('ontouchstart' in document.documentElement === true) {
-    return 'touchstart';
-  } else {
-    return 'click';
-  }
-
-})();
-
 let id = 0;
 function createCardElement() {
   const card = document.createElement('div');
@@ -41,11 +32,9 @@ function createCardElement() {
   card.setAttribute('data-id',id);
   const front = document.createElement('div');
   front.classList.add('front','item');
-  //front.textContent = '앞면'
   front.setAttribute('data-background',shuffled[id]);
   const back = document.createElement('div');
   back.classList.add('back','item');
-  //back.textContent = '뒷면'
   back.setAttribute('data-id',id);
   
   back.style.backgroundImage = `url(./images/${shuffled[id]}.jpg)`;
@@ -81,7 +70,7 @@ function updateTimerText(time) {
   $timer.textContent = `${restTime} 남았어요`;
 }
 
-$startButton.addEventListener(clickEvent,handleStartGame);
+$startButton.addEventListener('click',handleStartGame);
 
 function handleStartGame() {
   $startPopup.classList.add('popup-hidden');
@@ -107,7 +96,10 @@ function cardControl() {
   for (let i = 0; i < ROW*COL; i++) {
     const card = createCardElement();
     cardContainer.append(card);
-    card.addEventListener(clickEvent,handleCard);
+    card.addEventListener('click',(e)=>{
+      e.currentTarget.style.background = '#fce700';
+      handleCard(e);
+    });
     setTimeout(() => {
       card.classList.add('hidden');
       isStarted = false;
@@ -137,8 +129,8 @@ function handleCard(e) {
   whileTwo.push(e.currentTarget);
   doubleClick.push(e.currentTarget.dataset.id)
 
-  e.currentTarget.classList.add('hidden');먹
-  e.currentTarget.style.background = '#72be5c';
+  e.currentTarget.classList.add('hidden');
+
   if(twoTarget.length>=2){
     if (twoTarget[0] === twoTarget[1]) {
       countSuccess++;
@@ -187,7 +179,7 @@ function showPopupText(text) {
   $resultPopupText.textContent = text;
 }
 
-$resultButton.addEventListener(clickEvent,()=>{
+$resultButton.addEventListener('click',()=>{
   $resultPopup.classList.add('popup-hidden');
   $resultButton.classList.remove('transition');
   $timer.textContent = '';
