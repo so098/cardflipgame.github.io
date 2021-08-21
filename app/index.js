@@ -39,7 +39,7 @@ function createCardElement() {
   //back.textContent = '뒷면'
   back.setAttribute('data-id',id);
   
-  back.style.backgroundImage = `url(../images/${shuffled[id]}.jpg)`;
+  back.style.backgroundImage = `url(./images/${shuffled[id]}.jpg)`;
   card.append(front,back);
   id++;
   return card;
