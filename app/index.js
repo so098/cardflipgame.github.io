@@ -19,14 +19,6 @@ const ROW = 4;
 const COL = 4;
 let isStarted = false;
 
-const cardContainer = document.createElement('div');
-cardContainer.classList.add('card-container');
-cardContainer.addEventListener('click',(e)=>{
- // console.log(e.target+'front back',e.target.parentNode+'card');
-  e.target.parentNode.style.background = '#fce700';
-  handleCard(e);
-});
-
 function randomPlayer() {
   while(frontImagesCopy.length > 0){
     const colors = Math.floor(Math.random()*frontImagesCopy.length);
@@ -86,7 +78,7 @@ function handleStartGame() {
   $startButton.classList.remove('transition');
   $cardGameArea.classList.remove('popup-hidden');
   isStarted = true;
-  $cardGameArea.textContent = '';
+  cardContainer.textContent = '';
   frontImagesCopy = frontImages.concat(frontImages);
   shuffled = [];
   id = 0;
@@ -98,7 +90,14 @@ function handleStartGame() {
   cardControl();
 
 }
-
+const cardContainer = document.createElement('div');
+cardContainer.classList.add('card-container');
+cardContainer.addEventListener('click',(e)=>{
+  console.log(e.target,e.target.parentNode);
+ // console.log(e.target+'front back',e.target.parentNode+'card');
+  e.target.style.background = '#fce700';
+  //handleCard(e);
+});
 function cardControl() {
 
   for (let i = 0; i < ROW*COL; i++) {
