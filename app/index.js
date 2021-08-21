@@ -19,11 +19,10 @@ const ROW = 4;
 const COL = 4;
 let isStarted = false;
 const SOUND = {
-  start : new Audio('../sound/startButtonSound.wav'),
-  progress : new Audio('../sound/progressSound.mp3'),
-  end : new Audio('../sound/endSound.mp3'),
-  win : new Audio('../sound/resultWinSound.mp3'),
-  lose : new Audio('../sound/resultLoseSound.mp3'),
+  start : document.querySelector('.start-button-sound'),
+  progress : document.querySelector('.progress-sound'),
+  win : document.querySelector('.win-sound'),
+  lose : document.querySelector('.lose-sound'),
 }
 
 function playSound(sound) {
