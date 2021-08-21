@@ -24,7 +24,14 @@ function randomPlayer() {
     shuffled = shuffled.concat(frontImagesCopy.splice(colors,1));
   }
 }
+let clickEvent = (function() {
+  if ('ontouchstart' in document.documentElement === true) {
+    return 'touchstart';
+  } else {
+    return 'click';
+  }
 
+})();
 let id = 0;
 function createCardElement() {
   const card = document.createElement('div');
@@ -72,7 +79,7 @@ function updateTimerText(time) {
   $timer.textContent = `${restTime} 남았어요`;
 }
 
-$startButton.addEventListener('click',handleStartGame);
+$startButton.addEventListener(clickEvent,handleStartGame);
 
 function handleStartGame() {
   $startPopup.classList.add('popup-hidden');
@@ -100,7 +107,7 @@ function cardControl() {
   cardContainer.classList.add('card-container');
   for(let i = 0; i < ROW*COL; i++) {
     const card = createCardElement();
-    card.addEventListener('click',handleCard);
+    card.addEventListener(clickEvent,handleCard);
     cardContainer.append(card);
     setTimeout(()=>{
       card.classList.add('hidden');
@@ -182,7 +189,7 @@ function showPopupText(text) {
   $resultPopupText.textContent = text;
 }
 
-$resultButton.addEventListener('click',()=>{
+$resultButton.addEventListener(clickEvent,()=>{
   $resultPopup.classList.add('popup-hidden');
   $resultButton.classList.remove('transition');
   $timer.textContent = '';
