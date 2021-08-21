@@ -24,6 +24,7 @@ function randomPlayer() {
     shuffled = shuffled.concat(frontImagesCopy.splice(colors,1));
   }
 }
+
 let clickEvent = (function() {
   if ('ontouchstart' in document.documentElement === true) {
     return 'touchstart';
@@ -32,6 +33,7 @@ let clickEvent = (function() {
   }
 
 })();
+
 let id = 0;
 function createCardElement() {
   const card = document.createElement('div');
@@ -94,33 +96,30 @@ function handleStartGame() {
   countRemain = frontImages.length;
   $successCount.textContent = `찾은 가족 : ${countSuccess}개`;
   $remainCount.textContent = `남은 가족 : ${countRemain}개`;
-
-   randomPlayer();
-  
-    cardControl();
+  randomPlayer();
+  cardControl();
 
 }
-//randomPlayer();
-//cardControl();
+
 function cardControl() {
   const cardContainer = document.createElement('div');
   cardContainer.classList.add('card-container');
-  for(let i = 0; i < ROW*COL; i++) {
+  for (let i = 0; i < ROW*COL; i++) {
     const card = createCardElement();
     card.addEventListener(clickEvent,handleCard);
+    card.addEventListener('touchend',handleCard);
     cardContainer.append(card);
-    setTimeout(()=>{
+    setTimeout(() => {
       card.classList.add('hidden');
       isStarted = false;
     },100+100*i);
-    setTimeout(()=>{
+    setTimeout(() => {
       card.classList.remove('hidden');
-      
       isStarted = true;
     },3000);
-    
   }
-  setTimeout(()=>{
+
+  setTimeout(() => {
     startGameTimer();
   },4000);
   
