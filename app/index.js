@@ -117,7 +117,6 @@ function cardControl() {
     const card = createCardElement();
     cardContainer.append(card);
     card.addEventListener('click',(e)=>{
-      console.log(e.target,e.currentTarget);
       handleCard(e);
     });
     setTimeout(() => {
@@ -155,7 +154,6 @@ function handleCard(e) {
   if(twoTarget.length>=2){
     if (twoTarget[0] === twoTarget[1]) {
       countSuccess++;
-      console.log('맞춤');
 
       setTimeout(()=>{
         whileTwo[0].classList.add('selected');
@@ -166,7 +164,6 @@ function handleCard(e) {
       setTimeout(() => {
         whileTwo[0].classList.remove('selected');
         whileTwo[1].classList.remove('selected');
-        console.log('못맞충',whileTwo);
         
       },300)
     }
@@ -207,6 +204,5 @@ $resultButton.addEventListener('click',()=>{
   $resultPopup.classList.add('popup-hidden');
   $resultButton.classList.remove('transition');
   $timer.textContent = '';
-  stopSound(SOUND.end);
   handleStartGame();
 });
