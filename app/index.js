@@ -106,9 +106,8 @@ function cardControl() {
   cardContainer.classList.add('card-container');
   for (let i = 0; i < ROW*COL; i++) {
     const card = createCardElement();
-    card.addEventListener(clickEvent,handleCard);
-    card.addEventListener('touchstart',handleCard);
     cardContainer.append(card);
+    card.addEventListener(clickEvent,handleCard);
     setTimeout(() => {
       card.classList.add('hidden');
       isStarted = false;
@@ -138,7 +137,7 @@ function handleCard(e) {
   whileTwo.push(e.currentTarget);
   doubleClick.push(e.currentTarget.dataset.id)
 
-  e.currentTarget.classList.add('hidden');
+  e.currentTarget.classList.add('hidden');먹
   e.currentTarget.style.background = '#72be5c';
   if(twoTarget.length>=2){
     if (twoTarget[0] === twoTarget[1]) {
