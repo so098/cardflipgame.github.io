@@ -102,8 +102,8 @@ function cardControl() {
       console.log(e.target.nextSibling,e.target.parentNode);
      // console.log(e.target+'front back',e.target.parentNode+'card');
       //e.target.style.background = '#fce700';
-      e.currentTarget.classList.add('selected');
-     // handleCard(e);
+
+      handleCard(e);
     });
     setTimeout(() => {
       card.classList.add('selected');
@@ -126,15 +126,15 @@ const twoTarget = [];
 const whileTwo = [];
 const doubleClick = [];
 function handleCard(e) {
-  if (!isStarted || doubleClick.includes(e.target.parentNode.dataset.id) || !e.target.dataset.background) {
+  if (!isStarted || doubleClick.includes(e.currentTarget.dataset.id) || !e.target.dataset.background) {
     return;
   }
 
   twoTarget.push(e.target.dataset.background);
-  whileTwo.push(e.target.parentNode);
-  doubleClick.push(e.target.parentNode.dataset.id);
+  whileTwo.push(e.currentTarget);
+  doubleClick.push(e.currentTarget.dataset.id);
 
-  e.target.nextSibling.parentNode.classList.add('selected');
+  e.currentTarget.classList.add('selected');
 
   if(twoTarget.length>=2){
     if (twoTarget[0] === twoTarget[1]) {
