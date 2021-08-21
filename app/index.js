@@ -102,7 +102,7 @@ function cardControl() {
       console.log(e.target.nextSibling,e.target.parentNode);
      // console.log(e.target+'front back',e.target.parentNode+'card');
       //e.target.style.background = '#fce700';
-      e.target.nextSibling.textContent = '1111';
+      e.currentTarget.classList.add('selected');
      // handleCard(e);
     });
     setTimeout(() => {
