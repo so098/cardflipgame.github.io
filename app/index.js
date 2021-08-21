@@ -99,7 +99,7 @@ function cardControl() {
     const card = createCardElement();
     cardContainer.append(card);
     card.addEventListener('click',(e)=>{
-      console.log(e.target.nextSibling,e.target.parentNode);
+      console.log(e.target,e.currentTarget);
      // console.log(e.target+'front back',e.target.parentNode+'card');
       //e.target.style.background = '#fce700';
 
