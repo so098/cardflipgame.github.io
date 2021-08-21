@@ -22,6 +22,8 @@ const SOUND = {
   start : new Audio('../sound/startButtonSound.wav'),
   progress : new Audio('../sound/progressSound.mp3'),
   end : new Audio('../sound/endSound.mp3'),
+  win : new Audio('../sound/resultWinSound.mp3'),
+  lose : new Audio('../sound/resultLoseSound.mp3'),
 }
 
 function playSound(sound) {
@@ -65,7 +67,8 @@ function startGameTimer() {
 
   timer = setInterval(() => {
     if(timeRemainSec < 0) {
-      showPopupText('괜차나~ 다음번에 다 찾으면 돼~')
+      showPopupText('제대로 하세요!!');
+      playSound(SOUND.lose);
       clearInterval(timer);
       return;
     }
@@ -186,7 +189,8 @@ function showPopupResult(countRemain){
   if(countRemain === 0) {
     stopGameTimer();
     setTimeout(()=>{
-      showPopupText('그걸 다 찾다니 굉장해 엄청나~!');
+      showPopupText('이겼다 나의승리~~');
+      playSound(SOUND.win);
     },500);
     
   }
@@ -196,7 +200,7 @@ function showPopupText(text) {
   $resultPopup.classList.remove('popup-hidden');
   $resultButton.classList.add('transition');
   $resultPopupText.textContent = text;
-  playSound(SOUND.end);
+  
   stopSound(SOUND.progress);
 }
 
