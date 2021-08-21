@@ -18,6 +18,20 @@ let restTime;
 const ROW = 4;
 const COL = 4;
 let isStarted = false;
+const SOUND = {
+  start : new Audio('../sound/startButtonSound.wav'),
+  progress : new Audio('../sound/progressSound.mp3'),
+  end : new Audio('../sound/endSound.mp3'),
+}
+
+function playSound(sound) {
+  sound.currentTime = 0;
+  sound.play();
+}
+
+function stopSound(sound) {
+  sound.pause();
+}
 
 function randomPlayer() {
   while(frontImagesCopy.length > 0){
@@ -74,6 +88,8 @@ function updateTimerText(time) {
 $startButton.addEventListener('click',handleStartGame);
 
 function handleStartGame() {
+  playSound(SOUND.start);
+  
   $startPopup.classList.add('popup-hidden');
   $startButton.classList.remove('transition');
   $cardGameArea.classList.remove('popup-hidden');
@@ -88,7 +104,7 @@ function handleStartGame() {
   $remainCount.textContent = `남은 가족 : ${countRemain}명`;
   randomPlayer();
   cardControl();
-
+  
 }
 
 function cardControl() {
@@ -100,24 +116,22 @@ function cardControl() {
     cardContainer.append(card);
     card.addEventListener('click',(e)=>{
       console.log(e.target,e.currentTarget);
-     // console.log(e.target+'front back',e.target.parentNode+'card');
-      //e.target.style.background = '#fce700';
-
       handleCard(e);
     });
     setTimeout(() => {
       card.classList.add('selected');
       isStarted = false;
-    },100+100*i);
+    },100 + 100 * i);
     setTimeout(() => {
       card.classList.remove('selected');
       isStarted = true;
-    },3000);
+    }, 3000);
   }
 
- // setTimeout(() => {
- //   startGameTimer();
- // },4000);
+  setTimeout(() => {
+    startGameTimer();
+    playSound(SOUND.progress);
+  },4000);
   
   $cardGameArea.append(cardContainer);
 }
@@ -182,11 +196,14 @@ function showPopupText(text) {
   $resultPopup.classList.remove('popup-hidden');
   $resultButton.classList.add('transition');
   $resultPopupText.textContent = text;
+  playSound(SOUND.end);
+  stopSound(SOUND.progress);
 }
 
 $resultButton.addEventListener('click',()=>{
   $resultPopup.classList.add('popup-hidden');
   $resultButton.classList.remove('transition');
   $timer.textContent = '';
+  stopSound(SOUND.end);
   handleStartGame();
 });
