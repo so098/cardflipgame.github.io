@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>카드뒤집기게임</title>
+  <link rel="stylesheet" href="styles/index.css">
+  
+</head>
+<body>
+  <h1 class="card-flip__logo">
+    <img src="/images/cardGame_logo.png" alt="짱구는 못말려 카드게임">
+  </h1>
+  <div class="card-flip__timer__container">
+    <p class="timer"></p>
+  </div>
+  <div class="card-flip__popup__start card-flip__popup">
+    <div class="card-flip__start__popup__container">
+    <h2 class="card-flip__start__popup__text ">🔈한번 보여주고 시작입니다!</h2><br/>
+    <button class="start-button transition">게임시작</button>
+    </div>
+  </div>
+
+    <article class="card-flip__area popup-hidden">
+
+    </article>
+    <article class="card-flip__count">
+      <p class="success-count"></p>
+      <p class="remain-count"></p>
+    </article>
+    <div class="card-flip__popup__result card-flip__popup transition popup-hidden">
+      <div class="card-flip__popup__result__container">
+       <h2 class="card-flip__popup__text">제대로 하랬지</h2>
+       <button class="card-flip__popup__button transition">다시하기</button>
+      </div>
+    </div>
+  <script src="app/index.js" defer></script>
+</body>
+</html>
