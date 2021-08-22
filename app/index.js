@@ -128,7 +128,7 @@ function cardControl() {
   for (let i = 0; i < ROW*COL; i++) {
     const card = createCardElement();
     cardContainer.append(card);
-    card.addEventListener('click',handleCard);
+    card.addEventListener('click',handleCardFlip);
 
     setTimeout(() => {
       card.classList.add(SELECTED);
@@ -150,7 +150,7 @@ function cardControl() {
   $cardGameArea.append(cardContainer);
 }
 
-function handleCard(e) {
+function handleCardFlip(e) {
   const targetBackground = e.target.dataset.background;
   const currentTarget = e.currentTarget;
   const currentTargetId = e.currentTarget.dataset.id;
