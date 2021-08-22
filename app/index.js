@@ -27,6 +27,7 @@ const soundLose = document.querySelector('.lose-sound');
 
 
 function playSound(sound) {
+  sound.currentTime = 0;
   sound.play();
 }
 
