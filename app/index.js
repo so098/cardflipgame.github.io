@@ -18,12 +18,13 @@ let restTime;
 const ROW = 4;
 const COL = 4;
 let isStarted = false;
-const SOUND = {
-  start : document.querySelector('.start-button-sound'),
-  progress : document.querySelector('.progress-sound'),
-  win : document.querySelector('.win-sound'),
-  lose : document.querySelector('.lose-sound'),
-}
+
+const soundStart = document.querySelector('.start-button-sound');
+const soundProgress = document.querySelector('.progress-sound');
+const soundWin = document.querySelector('.win-sound');
+const soundLose = document.querySelector('.lose-sound');
+
+
 
 function playSound(sound) {
   sound.play();
@@ -66,7 +67,7 @@ function startGameTimer() {
   timer = setInterval(() => {
     if(timeRemainSec < 0) {
       showPopupText('제대로 하세요!!');
-      playSound(SOUND.lose);
+      playSound(soundLose);
       clearInterval(timer);
       return;
     }
@@ -89,7 +90,7 @@ function updateTimerText(time) {
 $startButton.addEventListener('click',handleStartGame);
 
 function handleStartGame() {
-  playSound(SOUND.start);
+  playSound(soundStart);
   
   $startPopup.classList.add('popup-hidden');
   $startButton.classList.remove('transition');
@@ -130,7 +131,7 @@ function cardControl() {
 
   setTimeout(() => {
     startGameTimer();
-    playSound(SOUND.progress);
+    playSound(soundProgress);
   },4000);
   
   $cardGameArea.append(cardContainer);
@@ -185,7 +186,7 @@ function showPopupResult(countRemain){
     stopGameTimer();
     setTimeout(()=>{
       showPopupText('이겼다 나의승리~~');
-      playSound(SOUND.win);
+      playSound(soundWin);
     },500);
     
   }
@@ -196,7 +197,7 @@ function showPopupText(text) {
   $resultButton.classList.add('transition');
   $resultPopupText.textContent = text;
   
-  stopSound(SOUND.progress);
+  stopSound(soundProgress);
 }
 
 $resultButton.addEventListener('click',()=>{
